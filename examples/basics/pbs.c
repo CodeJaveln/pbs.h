@@ -6,6 +6,7 @@ int main() {
 
     pbs_cc(&cmd, "src/main.c");
     pbs_output(&cmd, "bin/game");
+    pbs_define(&cmd, DEFINE("FOO", "bar"));
 
     pbs_run(&cmd);
 

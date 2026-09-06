@@ -38,7 +38,7 @@ typedef struct Definition {
 
 // CompileCmd *cmd, Definition definitions...
 #define pbs_define(cmd, ...) \
-    pbs__define(cmd, __VA_ARGS__, NULL)
+    pbs__define(cmd, __VA_ARGS__, (Definition){0})
 
 // ArgList *arg_list, const char *args...
 #define pbs_args_append(arg_list, ...) \
@@ -193,8 +193,20 @@ void pbs__cc(PbsCmd *cmd, ...) {
 }
 
 void pbs__define(PbsCmd *cmd, ...) {
+    va_list defs;
+    va_start(defs, cmd);
+
+    Definition def = va_arg(defs, Definition);
+    while (def.name != NULL) {
+        char *str = malloc(strlen(def.name) + strlen(def.value) + 2);
+        sprintf(str, "%s=%s", def.name, def.value);
+        pbs_args_append(&cmd->arg_list, "-D", str);
+
+        def = va_arg(defs, Definition);
+    }
+
+    va_end(defs);
     // check cmd->valid == true
-    // extract va args and append Definition name & value as "-D" "name=value" as separate args.
 }
 
 void pbs_output(PbsCmd *cmd, const char *outfile) {
