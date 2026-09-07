@@ -65,15 +65,14 @@ void pbs_run(PbsCmd *cmd);
 #include <unistd.h>
 #include <sys/wait.h>
 
-#define da_append(xs, x) \
-    do { \
-        if (xs->len >= xs->cap) { \
-            if (xs->cap == 0) xs->cap = 256; \
-            else xs->cap *= 2; \
-            xs->arr = realloc(xs->arr, xs->cap * sizeof(*xs->arr)); \
-        } \
-        xs->arr[xs->len++] = x; \
-    } while (false)
+static void pbs_arg_append(ArgList *arg_list, char *arg) {
+    if (arg_list->len >= arg_list->cap) {
+        if (arg_list->cap == 0) arg_list->cap = 256;
+        else arg_list->cap *= 2;
+        arg_list->arr = realloc(arg_list->arr, arg_list->cap * sizeof(*arg_list->arr));
+    }
+    arg_list->arr[arg_list->len++] = arg;
+}
 
 void pbs__args_append(ArgList *arg_list, ...) {
     va_list args;
@@ -89,7 +88,7 @@ void pbs_args_va_append(ArgList *arg_list, va_list args) {
     const char *str = va_arg(args, const char *);
     while (str) {
         char *d_str = strdup(str);
-        da_append(arg_list, d_str);
+        pbs_arg_append(arg_list, d_str);
 
         str = va_arg(args, const char *);
     }
@@ -215,7 +214,7 @@ void pbs_output(PbsCmd *cmd, const char *outfile) {
 
 void pbs_run(PbsCmd *cmd) {
     ArgList *arg_list = &cmd->arg_list;
-    da_append(arg_list, NULL);
+    pbs_arg_append(arg_list, NULL);
 
     pid_t pid = fork();
     if (pid == -1) {
