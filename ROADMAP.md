@@ -1,10 +1,10 @@
 # Roadmap
 
 ## 2.0.0
-nob compliant rebuild system
-recursive file walking
-append arguments to command type
-get last file modification
+- [x] nob compliant rebuild system
+- [ ] recursive file walking
+- [ ] append arguments to command type
+- [ ] get last file modification
 
 ## 3.0.0
 error handling
