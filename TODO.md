@@ -1,6 +1,7 @@
 # TODO
 
 ## High priority
+- Most Important rework functions to honest
 - rebuild
 - recursive file getting (from directory)
 - complete existing functions
@@ -8,6 +9,7 @@
 - central error handling
 
 ## Low Priority
+- Rebuild with more options (ask for a compile command?)
 - compile static and shared libraries
 
 ## Ideas
