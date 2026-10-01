@@ -25,7 +25,7 @@
     (Definition){ .name = def_name, .value = #def_value }
 
 //Args:
-//  int argc, const char **argv
+//  int argc, char **argv
 //Return:
 //  void
 //Description:
@@ -36,7 +36,7 @@
     pbs__go_rebuild(argc, argv, __FILE__, NULL)
 
 //Args:
-//  int argc, const char **argv, const char *sources...
+//  int argc, char **argv, char *sources...
 //Return:
 //  void
 //Description:
@@ -48,7 +48,7 @@
     pbs__go_rebuild(argc, argv, __FILE__, __VA_ARGS__, NULL)
 
 //Args:
-//  CompileCmd *cmd, const char *sources...
+//  CompileCmd *cmd, char *sources...
 //Return:
 //  void
 //Description:
@@ -168,6 +168,10 @@ void pbs__go_rebuild(int argc, char **argv, char *source_file, ...) {
         return;
     }
 
+#ifdef PBS_DEBUG_PRINT
+    printf("pbs__go_rebuild: Will rebuild build system.\n");
+#endif
+
     unlink(argv[0]);
 
     PbsCmd cmd = {0};
@@ -276,7 +280,7 @@ static const char *get_cc() {
         return "c99";
     }
 
-    fprintf(stderr, "no way to get a C compiler!\n");
+    fprintf(stderr, "get_cc: Unknown C compiler.\n");
     exit(EXIT_FAILURE);
 
     return NULL;
@@ -321,6 +325,14 @@ void pbs_output(PbsCmd *cmd, const char *outfile) {
 }
 
 void pbs_run(PbsCmd *cmd) {
+#ifdef PBS_DEBUG_PRINTING
+    printf("pbs_run: Running command \"");
+    for (size_t i = 0; i < cmd->arg_list.len; i++) {
+        printf("%s ", cmd->arg_list.arr[i]);
+    }
+    printf("\"\n");
+#endif
+
     ArgList *arg_list = &cmd->arg_list;
     pbs_arg_append(arg_list, NULL);
 

@@ -2,18 +2,21 @@
 
 ## 2.0.0
 - [x] nob compliant rebuild system
-- [ ] recursive file walking
-- [ ] append arguments to command type
+- [ ] error handling
+
+### Possible additions to version
 - [ ] get last file modification
+- [ ] c99 compliant limits to PbsCmd (optionally)
 
 ## 3.0.0
-error handling
-full implemented api:
-- get last modification time of file
-- pbs extended recipe function rebuild (a bit strange if only a function wrapper)
-- build archive (static)
-- build objects
-- build shared library?
+- [ ] pbs extended recipe function rebuild (a bit strange if only a function wrapper)
+- [ ] recursive file walking
+- [ ] build archive (static)
+- [ ] build objects
+- [ ] build shared library?
+
+### Possible additions to version
+- [ ] autogen documentation
 
 ### NOTES
 Notes on rebuild system:
