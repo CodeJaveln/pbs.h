@@ -19,10 +19,13 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+#define STR(a) #a
+#define STRINGIFY(a) STR(a)
+
 //Example:
 //  pbs_define(&cmd, DEFINE("FOO", 42));
 #define DEFINE(def_name, def_value) \
-    (Definition){ .name = def_name, .value = #def_value }
+    (Definition){ .name = def_name, .value = STRINGIFY(def_value) }
 
 //Args:
 //  int argc, char **argv

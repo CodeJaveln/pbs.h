@@ -7,5 +7,3 @@ It's just more fun writing code for real systems.
 ## Usage
 It is designed after tsoding/nob.h, so bootstrapped system kind of where a pbs.c file is defined with a main.
 This file specifies the recipe for building stuff.
-
-Currently nothing special, just an array of strings that represents a command and gets executed.

@@ -3,12 +3,15 @@
 ## 2.0.0
 - [x] nob compliant rebuild system
 - [ ] error handling
+- [ ] memory arenas
 
 ### Possible additions to version
 - [ ] get last file modification
 - [ ] c99 compliant limits to PbsCmd (optionally)
+- [ ] honest library??
 
 ## 3.0.0
+- [ ] packages stuff
 - [ ] pbs extended recipe function rebuild (a bit strange if only a function wrapper)
 - [ ] recursive file walking
 - [ ] build archive (static)
